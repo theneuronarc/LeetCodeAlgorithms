@@ -9,6 +9,8 @@ Special cases
 "", "aa", "au", "abba", "dvdf", "bbbbb"
 */
 
+#include "std_headers.h"
+
 #define max(a,b) (a>b?a:b)
 
 class longestStringWithoutRepeating {
