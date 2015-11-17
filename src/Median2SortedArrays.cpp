@@ -19,10 +19,22 @@ class MedianArrays {
 				return;
 
 			if (a.size() && b.size()) {
-				(a.back() > b.back() ? b.push_back(a.back()) : a.push_back(b.back()));
+				//(a.back() > b.back() ? b.push_back(a.back()) : a.push_back(b.back()));
 
-				for (int i = 0; i < totalElements; i++) {
-					c.push_back((a[idxA] < b[idxB] ? idxA++, a[idxA] : idxB++, b[idxB]));
+				for (int i = 0; (idxA < a.size() && idxB < b.size()); i++) {
+					c.push_back((a[idxA] < b[idxB] ? a[idxA++] : b[idxB++]));
+				}
+
+				if (idxA < a.size()) {
+					for (int i = idxA; i < a.size(); i++) {
+						c.push_back(a[i]);
+					}
+				}
+
+				if (idxB < b.size()) {
+					for (int i = idxB; i < b.size(); i++) {
+						c.push_back(b[i]);
+					}
 				}
 			}
 			else {
@@ -35,16 +47,17 @@ class MedianArrays {
 
 		double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 			vector<int> mergedArr;
-			int medianIdx;
+			int medianIdx1, medianIdx2;
 			merge(nums1, nums2, mergedArr);
-			medianIdx = (mergedArr.size() - 1) / 2
-			return mergedArr[(mergedArr.size() - 1) / 2];
+			medianIdx1 = (mergedArr.size() - 1) / 2;
+			medianIdx2 = (mergedArr.size()) / 2;
+			return (mergedArr[medianIdx1] + mergedArr[medianIdx2])/2.0;
 		}
 };
 
 int MedianArraysMain() {
 	MedianArrays obj;
-	vector<int> a;
+	vector<int> a = { 1 };
 	vector<int> b = { 1 };
 	cout << obj.findMedianSortedArrays(a, b);
 	return 0;
