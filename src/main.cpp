@@ -3,9 +3,10 @@
 extern int MedianArraysMain();
 extern void longestpalindromeMain();
 extern void zigzagConcervion();
+extern void reverseInteger();
 
 int main() {
 	std::cout << "Hello World" << endl;
-	zigzagConcervion();
+	reverseInteger();
 	return 0;
 }
