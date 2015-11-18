@@ -11,9 +11,9 @@ Find the median of the two sorted arrays. The overall run time complexity should
 class MedianArrays {
 	public:
 		void merge(vector<int> &a, vector<int> &b, vector<int> &c) {
-			int idxA = 0;
-			int idxB = 0;
-			int totalElements = a.size() + b.size();
+			unsigned int idxA = 0;
+			unsigned int idxB = 0;
+			unsigned int totalElements = a.size() + b.size();
 
 			if (!totalElements)
 				return;
@@ -21,25 +21,25 @@ class MedianArrays {
 			if (a.size() && b.size()) {
 				//(a.back() > b.back() ? b.push_back(a.back()) : a.push_back(b.back()));
 
-				for (int i = 0; (idxA < a.size() && idxB < b.size()); i++) {
+				for (unsigned int i = 0; (idxA < a.size() && idxB < b.size()); i++) {
 					c.push_back((a[idxA] < b[idxB] ? a[idxA++] : b[idxB++]));
 				}
 
 				if (idxA < a.size()) {
-					for (int i = idxA; i < a.size(); i++) {
+					for (unsigned int i = idxA; i < a.size(); i++) {
 						c.push_back(a[i]);
 					}
 				}
 
 				if (idxB < b.size()) {
-					for (int i = idxB; i < b.size(); i++) {
+					for (unsigned int i = idxB; i < b.size(); i++) {
 						c.push_back(b[i]);
 					}
 				}
 			}
 			else {
 				vector<int> &d = (a.size() ? a : b);
-				for (int i = 0; i < d.size(); i++) {
+				for (unsigned int i = 0; i < d.size(); i++) {
 					c.push_back(d[i]);
 				}
 			}
