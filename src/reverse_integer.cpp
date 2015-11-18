@@ -10,19 +10,26 @@ Example2: x = -123, return -321
 
 #include "std_headers.h"
 
-class Solution {
+class ReverseInteger {
 public:
+	
 	int reverse(int x) {
 		int sign = 1;
-		long long result = 0;
+		int result = 0;
+
 		if (x < 0) {
 			sign = -1;
 			x *= -1;
 		}
 
 		do {
+			if (result > INT_MAX / 10 || result < INT_MIN / 10 ) {
+				result = 0;
+				break;
+			}
 			result *= 10;
 			result += (x % 10);
+			
 		} while (x /= 10);
 
 		return sign*result;		
@@ -31,9 +38,8 @@ public:
 
 void reverseInteger(){
 
-	Solution obj;
+	ReverseInteger obj;
 	int x = 1534236469;
-	cout << sizeof(long) << " " << sizeof(int) << endl;
 	cout << x << " => " << obj.reverse(x) << endl;
 	x = 0;
 	cout << x << " => " << obj.reverse(x) << endl;
