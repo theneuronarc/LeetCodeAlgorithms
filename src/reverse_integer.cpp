@@ -16,12 +16,11 @@ public:
 	int reverse(int x) {
 		int sign = 1;
 		int result = 0;
-
+		// Not needed
 		if (x < 0) {
 			sign = -1;
 			x *= -1;
 		}
-
 		do {
 			if (result > INT_MAX / 10 || result < INT_MIN / 10 ) {
 				result = 0;
