@@ -29,46 +29,130 @@ isMatch("aab", "c*a*b") ? true
 class Solution {
 	bool isMatching;
 	char matchCharacter;
-	typedef bool (Solution::*stateF)(const char* regExp, int regExpIdx, const char* str, int strIdx);
-public:
-	stateF findNextState(const char* regExp, int& regExpIdx) {
-		stateF nextState;
+	int regExpLen;
+	int strLen;
 
-		if( (regExpIdx < strlen(regExp) - 1) && (regExp[regExpIdx + 1] == '*')) {
-				nextState = stateGreedyPlaceholder;
+	typedef bool (Solution::*stateF)(const char* regExp, int& regExpIdx, const char* str, int& strIdx);
+
+	//stateF nextState;
+
+public:
+	
+	stateF findNextState(const char* regExp, int& regExpIdx, const char* str, int& strIdx) {
+		stateF nextState;
+		int len = regExpLen;
+		
+		if (len == 0 && regExpIdx >= len) {			
+			matchCharacter = '\0';
+			return &Solution::stateTerminate;
+		}
+
+		if( (regExpIdx < regExpLen - 1) && (regExp[regExpIdx + 1] == '*')) {
+				nextState = &Solution::stateGreedyPlaceholder;
+				matchCharacter = regExp[regExpIdx];
 				regExpIdx += 2;
 		}
 		else if (regExp[regExpIdx] == '.') {
-				nextState = stateDotPlaceholder;
+				nextState = &Solution::stateDotPlaceholder;
+				matchCharacter = regExp[regExpIdx];
 				regExpIdx++;
 		}
 		else {
-				nextState = stateSingleCharacter;
-				regExpIdx++
+				nextState = &Solution::stateSingleCharacter;
+				matchCharacter = regExp[regExpIdx];
+				regExpIdx++;
 		}
-
-		matchCharacter = regExp[regExpIdx];
+		
 		return nextState;
 	}
 
-	bool parse(string s, string p){
+	bool process(const char* regExp, int& regExpIdx, const char* str, int& strIdx) {
+		if (regExpIdx == regExpLen && strIdx == strLen)
+			return true;
+		else if (!(regExpIdx < regExpLen && strIdx < strLen)) {
+			isMatching = false;
+			return true;
+		}
+
+		stateF nextState = findNextState(regExp, regExpIdx, str, strIdx);
+		isMatching =  (this->*nextState)(regExp, regExpIdx, str, strIdx);
+		return false;
+	}
+
+	bool parse(string s, string p){		
 		if (s.empty() || p.empty()) {
 			return false;
 		}
-		stateBegin(s.c_str(), 0, p.c_str(), 0);
+
+		const char* regExp = p.c_str();
+		int regExpIdx = 0;
+		regExpLen = p.size();
+
+		const char* str = s.c_str();
+		int strIdx = 0;
+		strLen = s.size();
+		
+		bool terminate = false;
+
+		while (!terminate) {
+			terminate = process(regExp, regExpIdx, str, strIdx);
+		}
 
 		return isMatching;
+	}	
+
+	bool stateSingleCharacter(const char* regExp, int& regExpIdx, const char* str, int& strIdx){
+		int len = strLen;
+		if (len == 0 || strIdx >= len)
+			return false;
+		else {
+			if (matchCharacter == str[strIdx++])
+				return true;
+			else
+				return false;
+		}
 	}
 
-	bool stateBegin(const char* regExp, int regExpIdx, const char* str, int strIdx) {
-		stateF nextState;
-		 nextState(regExp, regExpIdx, str, strIdx);
+	bool stateDotPlaceholder(const char* regExp, int& regExpIdx, const char* str, int& strIdx){
+		int len = strLen;
+		if (len == 0 || strIdx >= len)
+			return false;
+		else {
+			strIdx++;
+			return true;			
+		}
 	}
-	bool stateSingleCharacter(const char* regExp, int regExpIdx, const char* str, int strIdx){}
-	bool stateDotPlaceholder(const char* regExp, int regExpIdx, const char* str, int strIdx){}
-	bool stateGreedyPlaceholder(const char* regExp, int regExpIdx, const char* str, int strIdx){}
 
-	void stateTerminate(){}
+	bool stateGreedyPlaceholder(const char* regExp, int& regExpIdx, const char* str, int& strIdx){
+		int len = strLen;
+		if (len == 0 || strIdx >= len)
+			return false;
+		else {		
+
+			while (strIdx < len) {
+				/*
+				if (matchCharacter != '.' && matchCharacter != str[strIdx]) 
+					break;
+				
+				*/
+
+				if (regExpIdx < regExpLen && regExp[regExpIdx] == str[strIdx])
+					regExpIdx++;
+				else {
+					if (matchCharacter != '.' && matchCharacter != str[strIdx])
+						break;
+				}
+
+				strIdx++;
+
+			}			
+			return true;				
+		}
+	}
+
+	bool stateTerminate(const char* regExp, int& regExpIdx, const char* str, int& strIdx){
+		return false;
+	}
 
 	bool isMatch(string s, string p) {
 		return parse(s, p);
@@ -76,5 +160,35 @@ public:
 };
 
 void regularExpressionMain() {
+	Solution obj;
+	string str;
+	string reg;
 
+	str = "aaaa";
+	reg = "a*";
+	cout << "(" << str << " , " << reg << ")  => " << obj.isMatch(str, reg) << endl;
+
+	str = "aa";
+	reg = "a";
+	cout << "(" << str << " , " << reg << ")  => " << obj.isMatch(str, reg) << endl;
+
+	str = "aa";
+	reg = "aa";
+	cout << "(" << str << " , " << reg << ")  => " << obj.isMatch(str, reg) << endl;
+
+	str = "aaa";
+	reg = "aa";
+	cout << "(" << str << " , " << reg << ")  => " << obj.isMatch(str, reg) << endl;
+
+	str = "aaaa";
+	reg = ".*";
+	cout << "(" << str << " , " << reg << ")  => " << obj.isMatch(str, reg) << endl;
+
+	str = "ab";
+	reg = ".*";
+	cout << "(" << str << " , " << reg << ")  => " << obj.isMatch(str, reg) << endl;
+
+	str = "aab";
+	reg = "c*a*b";
+	cout << "(" << str << " , " << reg << ")  => " << obj.isMatch(str, reg) << endl;
 }

@@ -97,7 +97,7 @@ void numberPalindromeTest() {
 	int x = 1;
 	cout << x << " " << obj.isPalindrome(x) << endl;
 
-	int x = 12344321;
+	x = 12344321;
 	cout << x << " " << obj.isPalindrome(x) << endl;
 
 	x = 123454321;
