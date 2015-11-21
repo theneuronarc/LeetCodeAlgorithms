@@ -9,9 +9,10 @@ extern void numberPalindromeTest();
 extern void regularExpressionMain();
 extern void maxAreaMain();
 extern void integerToRoman();
+extern void roman2Int();
 
 int main() {
-	std::cout << "Hello World" << endl;
-	integerToRoman();
+	std::cout << "Hello World" << endl;	
+	roman2Int();
 	return 0;
 }
