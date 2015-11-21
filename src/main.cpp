@@ -7,9 +7,11 @@ extern void reverseInteger();
 extern void myAtoiMain();
 extern void numberPalindromeTest();
 extern void regularExpressionMain();
+extern void maxAreaMain();
+extern void integerToRoman();
 
 int main() {
 	std::cout << "Hello World" << endl;
-	regularExpressionMain();
+	integerToRoman();
 	return 0;
 }
