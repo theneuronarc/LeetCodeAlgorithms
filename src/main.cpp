@@ -10,9 +10,10 @@ extern void regularExpressionMain();
 extern void maxAreaMain();
 extern void integerToRoman();
 extern void roman2Int();
+extern void longestCommonPrefix();
 
 int main() {
 	std::cout << "Hello World" << endl;	
-	roman2Int();
+	longestCommonPrefix();
 	return 0;
 }
