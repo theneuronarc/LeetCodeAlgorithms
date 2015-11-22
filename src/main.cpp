@@ -13,8 +13,9 @@ extern void roman2Int();
 extern void longestCommonPrefix();
 extern void threeSumMain();
 extern void threeSumClosestMain();
+extern void validParentheses();
 
 int main() {	
-	threeSumClosestMain();
+	validParentheses();
 	return 0;
 }
