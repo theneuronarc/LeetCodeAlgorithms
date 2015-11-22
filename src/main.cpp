@@ -14,8 +14,9 @@ extern void longestCommonPrefix();
 extern void threeSumMain();
 extern void threeSumClosestMain();
 extern void validParentheses();
+extern void mergeLists();
 
 int main() {	
-	validParentheses();
+	mergeLists();
 	return 0;
 }
