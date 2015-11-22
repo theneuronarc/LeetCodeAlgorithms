@@ -11,9 +11,9 @@ extern void maxAreaMain();
 extern void integerToRoman();
 extern void roman2Int();
 extern void longestCommonPrefix();
+extern void threeSumMain();
 
-int main() {
-	std::cout << "Hello World" << endl;	
-	longestCommonPrefix();
+int main() {	
+	threeSumMain();
 	return 0;
 }
