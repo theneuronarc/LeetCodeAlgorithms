@@ -12,8 +12,9 @@ extern void integerToRoman();
 extern void roman2Int();
 extern void longestCommonPrefix();
 extern void threeSumMain();
+extern void threeSumClosestMain();
 
 int main() {	
-	threeSumMain();
+	threeSumClosestMain();
 	return 0;
 }
