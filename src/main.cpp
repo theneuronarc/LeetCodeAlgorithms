@@ -17,7 +17,8 @@ extern void validParentheses();
 extern void mergeLists();
 extern void mergeKLists();
 
-int main() {	
+int main() {
+	Heap<int> maxHeap;
 	mergeKLists();
 	return 0;
 }

@@ -5,7 +5,8 @@
 #include <string>
 #include <stack>
 #include <functional>
-#include <queue>  
+#include <queue>
+#include "min_heap.h"
 
 
 using namespace std;
