@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <stack>
+#include <functional>
+#include <queue>  
 
 
 using namespace std;

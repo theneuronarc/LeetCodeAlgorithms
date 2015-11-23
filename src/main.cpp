@@ -15,8 +15,9 @@ extern void threeSumMain();
 extern void threeSumClosestMain();
 extern void validParentheses();
 extern void mergeLists();
+extern void mergeKLists();
 
 int main() {	
-	mergeLists();
+	mergeKLists();
 	return 0;
 }
