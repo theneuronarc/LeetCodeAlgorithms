@@ -16,9 +16,10 @@ extern void threeSumClosestMain();
 extern void validParentheses();
 extern void mergeLists();
 extern void mergeKLists();
+extern void reverseKnodesMain();
 
 int main() {
 	Heap<int> maxHeap;
-	mergeKLists();
+	reverseKnodesMain();
 	return 0;
 }

@@ -21,25 +21,114 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-ListNode* dummyHead = &ListNode(0);
-
-class Solution {
+class Solution1 {
 public:
-	ListNode* reverse(ListNode* head, int k) {
-		dummyHead->next = head;
+	ListNode* reverse(ListNode* dummyHead, int k) {		
 		ListNode* prev = dummyHead;
-		ListNode* cur = head;
+		ListNode* cur = dummyHead->next;
 		ListNode* next = cur->next;
-		while (next && k--) {
-			next = cur->next;
+		int tmp = 0;
+		while (next && tmp < k) {
 			cur->next = prev;
 			prev = cur;
+			cur = next;
+			next = cur->next;
+			tmp++;
 		}
-		dummyHead->next->next = next;
-		return dummyHead->next;
+		
+		if (!next && tmp < k) {
+			cur->next = prev;
+			prev = cur;
+			cur = next;
+			tmp++;
+		}
+
+		next = dummyHead->next;
+		dummyHead->next->next = cur;
+		dummyHead->next = prev;
+		if (tmp < k) 
+			return reverse(dummyHead, tmp);
+		else
+			return next;
 	}
 
 	ListNode* reverseKGroup(ListNode* head, int k) {
+		if (k <= 1 || head == NULL)
+			return head;
 
+		ListNode* dummyHead = new ListNode(0);
+		dummyHead->next = head;
+		ListNode* cur = dummyHead;
+		while ((cur = reverse(cur, k)) && cur->next);
+		
+
+		return dummyHead->next;
 	}
 };
+
+class Solution {
+public:
+	ListNode* reverseKGroup(ListNode* head, int k) {
+		if (k <= 1 || head == NULL)
+			return head;
+
+		ListNode* listHead = new ListNode(0);
+		listHead->next = head;
+
+		ListNode* dummyHead = listHead;
+		ListNode* prev, *cur, *next;		
+
+		do {
+			prev = dummyHead;
+			cur = dummyHead->next;
+			next = cur->next;
+			int tmp = 0;
+			while (next && tmp < k) {
+				cur->next = prev;
+				prev = cur;
+				cur = next;
+				next = cur->next;
+				tmp++;
+			}
+
+			if (!next && tmp < k) {
+				cur->next = prev;
+				prev = cur;
+				cur = next;
+				tmp++;
+			}
+
+			next = dummyHead->next;
+			dummyHead->next->next = cur;
+			dummyHead->next = prev;
+			if (tmp < k) {
+				k = tmp;
+				//dummyHead = reverse(dummyHead, tmp);
+			}
+			else
+				dummyHead = next;
+		} while (dummyHead && dummyHead->next);
+
+		return listHead->next;
+	}
+};
+
+static void printList(ListNode* node) {
+	while (node) {
+		cout << node->val << " -> ";
+		node = node->next;
+	}
+}
+void reverseKnodesMain() {
+	Solution obj;
+	ListNode* head = NULL;
+	int k = 3;
+	for (int i = 8; i >0; i--) {
+		ListNode* cur = new ListNode(i);
+		cur->next = head;
+		head = cur;
+	}
+
+	head = obj.reverseKGroup(head, k);
+	printList(head);
+}
