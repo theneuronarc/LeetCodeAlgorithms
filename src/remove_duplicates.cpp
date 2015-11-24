@@ -27,5 +27,3 @@ public:
 		return (cur_pos + 1);
 	}
 };
-
-
