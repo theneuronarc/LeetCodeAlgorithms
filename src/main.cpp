@@ -17,9 +17,10 @@ extern void validParentheses();
 extern void mergeLists();
 extern void mergeKLists();
 extern void reverseKnodesMain();
+extern void removeDuplicatesMain();
 
 int main() {
 	Heap<int> maxHeap;
-	reverseKnodesMain();
+	removeDuplicatesMain();
 	return 0;
 }
