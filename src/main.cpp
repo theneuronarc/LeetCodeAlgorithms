@@ -18,9 +18,10 @@ extern void mergeLists();
 extern void mergeKLists();
 extern void reverseKnodesMain();
 extern void removeDuplicatesMain();
+extern void divideMain();
 
 int main() {
 	Heap<int> maxHeap;
-	removeDuplicatesMain();
+	divideMain();
 	return 0;
 }
