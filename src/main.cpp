@@ -19,9 +19,10 @@ extern void mergeKLists();
 extern void reverseKnodesMain();
 extern void removeDuplicatesMain();
 extern void divideMain();
+extern void strStrMain();
 
 int main() {
 	Heap<int> maxHeap;
-	divideMain();
+	strStrMain();
 	return 0;
 }
