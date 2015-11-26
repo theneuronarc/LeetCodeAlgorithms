@@ -12,6 +12,8 @@ words: ["foo", "bar"]
 
 You should return the indices: [0,9].
 (order does not matter).
+
+http://n00tc0d3r.blogspot.hk/2013/06/substring-with-concatenation-of-all.html
 */
 
 #include "std_headers.h"

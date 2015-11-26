@@ -21,9 +21,10 @@ extern void removeDuplicatesMain();
 extern void divideMain();
 extern void strStrMain();
 extern void ssCatMain();
+extern void genParenthesesMain();
 
 int main() {
 	Heap<int> maxHeap;
-	ssCatMain();
+	genParenthesesMain();
 	return 0;
 }
