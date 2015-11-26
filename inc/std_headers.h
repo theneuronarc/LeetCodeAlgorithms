@@ -7,6 +7,9 @@
 #include <functional>
 #include <queue>
 #include <limits>
+#include <map>
+#include <stdio.h>
+#include <stdlib.h>
 #include "min_heap.h"
 
 

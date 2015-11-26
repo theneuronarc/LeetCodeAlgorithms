@@ -20,9 +20,10 @@ extern void reverseKnodesMain();
 extern void removeDuplicatesMain();
 extern void divideMain();
 extern void strStrMain();
+extern void ssCatMain();
 
 int main() {
 	Heap<int> maxHeap;
-	strStrMain();
+	ssCatMain();
 	return 0;
 }
