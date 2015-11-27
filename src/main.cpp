@@ -22,9 +22,10 @@ extern void divideMain();
 extern void strStrMain();
 extern void ssCatMain();
 extern void genParenthesesMain();
+extern void nextPerMain();
 
 int main() {
 	Heap<int> maxHeap;
-	genParenthesesMain();
+	nextPerMain();
 	return 0;
 }
