@@ -24,9 +24,10 @@ extern void ssCatMain();
 extern void genParenthesesMain();
 extern void nextPerMain();
 extern void rotSortedArrMain();
+extern void searchRangeMain();
 
 int main() {
 	Heap<int> maxHeap;
-	rotSortedArrMain();
+	searchRangeMain();
 	return 0;
 }
