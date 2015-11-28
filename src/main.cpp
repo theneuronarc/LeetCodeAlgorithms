@@ -23,9 +23,10 @@ extern void strStrMain();
 extern void ssCatMain();
 extern void genParenthesesMain();
 extern void nextPerMain();
+extern void rotSortedArrMain();
 
 int main() {
 	Heap<int> maxHeap;
-	nextPerMain();
+	rotSortedArrMain();
 	return 0;
 }
