@@ -25,9 +25,10 @@ extern void genParenthesesMain();
 extern void nextPerMain();
 extern void rotSortedArrMain();
 extern void searchRangeMain();
+extern void combinationSumMain();
 
 int main() {
 	Heap<int> maxHeap;
-	searchRangeMain();
+	combinationSumMain();
 	return 0;
 }
