@@ -26,9 +26,10 @@ extern void nextPerMain();
 extern void rotSortedArrMain();
 extern void searchRangeMain();
 extern void combinationSumMain();
+extern void countSayMain();
 
 int main() {
 	Heap<int> maxHeap;
-	combinationSumMain();
+	countSayMain();
 	return 0;
 }
