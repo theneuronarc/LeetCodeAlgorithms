@@ -27,9 +27,10 @@ extern void rotSortedArrMain();
 extern void searchRangeMain();
 extern void combinationSumMain();
 extern void countSayMain();
+extern void phoneNumbersMain();
 
 int main() {
 	Heap<int> maxHeap;
-	countSayMain();
+	phoneNumbersMain();
 	return 0;
 }
