@@ -60,6 +60,9 @@ public:
 			return;
 
 		for (int i = start; i <= end; i++) {
+			if (i > start && arr[i] == arr[i - 1])
+				continue;
+
 			subset[size] = arr[i];
 			findSet(arr, i+1, end, subset, size + 1,  target - arr[i], level + 1, res);			
 		}
@@ -79,9 +82,9 @@ public:
 
 void combinationSumMain() {
 	Solution obj;
-	vector<int> vc = { 2,2,2 };
+	vector<int> vc = { 1, 2,2,2, 3,4 };
 	vector<vector<int>> res;
-	res = obj.combinationSum(vc, 4);
+	res = obj.combinationSum(vc, 7);
 
 	for (int i = 0; i < res.size(); i++)
 		printList(res[i]);
