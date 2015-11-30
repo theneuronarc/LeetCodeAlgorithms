@@ -50,7 +50,7 @@ public:
 
 class Solution {
 public:
-	void findSet(int arr[], int start, const int& end, int subset[], int size,  int target, vector<vector<int>>& res) {
+	void findSet(int arr[], int start, const int& end, int subset[], int size,  int target, int level, vector<vector<int>>& res) {
 		if (target == 0) {
 			res.push_back(vector<int>(subset, subset + size));
 			return;
@@ -61,7 +61,7 @@ public:
 
 		for (int i = start; i <= end; i++) {
 			subset[size] = arr[i];
-			findSet(arr, i, end, subset, size + 1,  target - arr[i], res);			
+			findSet(arr, i+1, end, subset, size + 1,  target - arr[i], level + 1, res);			
 		}
 	}
 
@@ -70,18 +70,18 @@ public:
 		int *subset = new int[target];
 		if (candidates.empty())
 			return result;
-
+		
 		std::sort(candidates.begin(), candidates.end());
-		findSet(candidates.data(), 0, candidates.size() - 1, subset, 0, target, result);
+		findSet(candidates.data(), 0, candidates.size() - 1, subset, 0, target, 0,  result);
 		return result;
 	}
 };
 
 void combinationSumMain() {
 	Solution obj;
-	vector<int> vc = { 8,2,3,7 };
+	vector<int> vc = { 2,2,2 };
 	vector<vector<int>> res;
-	res = obj.combinationSum(vc, 13);
+	res = obj.combinationSum(vc, 4);
 
 	for (int i = 0; i < res.size(); i++)
 		printList(res[i]);
