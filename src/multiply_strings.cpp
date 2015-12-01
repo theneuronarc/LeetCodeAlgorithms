@@ -13,6 +13,9 @@ Note: The numbers can be arbitrarily large and are non-negative.
 #include <stdlib.h>
 #include <math.h>
 
+#define printf(...)
+
+#if 0
 #define strrev(str) std::reverse(str, str + strlen(str));
 
 static int charToInt(char a) {
@@ -172,11 +175,140 @@ public:
 		return multiplyMain(num1, num2);
 	}
 };
+#endif
 
-void multiplyStringsMain() {
-	string num1 = "0";
-	string num2 = "9";
-	Solution obj;
-	obj.multiply(num1, num2);
+#define strrev(str) std::reverse(str.begin(), str.end());
+
+static int charToInt(char a) {
+	return (a - 48);
 }
 
+static char intToChar(int a) {
+	return (a + 48);
+}
+
+static void multiply(string& upper, int digit, string& result) {
+	int carry = 0;
+	int i = 0;
+
+	if (digit == 0) {
+		result = "0";
+		return;
+	}
+
+
+	for (i = 0; i < upper.size(); i++) {
+		int a = charToInt(upper[i]);
+		int product = a*digit + carry;
+		result.push_back(intToChar(product % 10));
+		carry = product / 10;
+	}
+
+	if (carry) {
+		result.push_back(intToChar(carry));		
+	}
+
+	strrev(result);
+	printf("\nMultiply of %s and %d is %s", upper, digit, result);
+}
+
+void sumStrings(string& n1, string& n2, string& rs) {
+	int c1, c2;
+
+	int i, j, m, cmax, sum;
+	printf("\nSumStrings : %s, %s, %s", n1, n2, rs);
+
+	c1 = n1.size();
+	c2 = n2.size();
+
+	strrev(n1);
+	strrev(n2);
+
+	cmax = c1;
+	if (c1<c2) {
+		cmax = c2;
+	}
+
+	m = 0;
+	for (i = 0; i< cmax; i++) {
+		if (c1 == c2 || (i < c1 && i < c2)) {
+			sum = m + charToInt(n1[i]) + charToInt(n2[i]);
+		}
+		else if (i >= c1) {
+			sum = m + charToInt(n2[i]);
+		}
+		else if (i >= c2) {
+			sum = m + charToInt(n1[i]);
+		}
+		rs.push_back(intToChar(sum % 10));
+		m = sum / 10;
+	}
+
+	if (m) {
+		rs.push_back(intToChar(m));
+		i++;
+	}
+	
+	strrev(rs);
+	printf("\nResult = %s", rs);
+	strrev(n2);
+}
+
+
+void add(string& acc, string num, int factor) {
+	string tmpAcc = acc;
+
+	for (int i = 0; i < factor; i++) {
+		num.push_back('0');
+	}
+	acc = "";
+	sumStrings(tmpAcc, num, acc);	
+}
+
+string multiplyMain(string& num1, string& num2) {
+	string c = "0";
+	string map[10] = { "0" };
+	bool fetch[10] = { false };
+
+	strrev(num1);
+	strrev(num2);
+
+	string* upper = &num1;
+	string* lower = &num2;
+
+	if (num2.size() > num1.size()) {
+		upper = &num2;
+		lower = &num1;
+	}
+
+	for (int i = 0; i < lower->size(); i++) {
+		int lowerDigit = charToInt((*lower)[i]);
+
+		if (!fetch[lowerDigit]) {
+			multiply(*upper, lowerDigit, map[lowerDigit]);
+			fetch[lowerDigit] = true;
+		}
+		printf("\nSum of %s and %s is", c, map[lowerDigit]);
+		add(c, map[lowerDigit], i);
+		printf(" %s", c);
+	}
+
+	return c;
+}
+
+class Solution {
+public:
+	string multiply(string num1, string num2) {
+		if (num1.empty() || num2.empty())
+			return "";
+
+		return multiplyMain(num1, num2);
+	}
+};
+
+void multiplyStringsMain() {
+	string num1 = "9";
+	string num2 = "99";
+	Solution obj;
+	cout << obj.multiply(num1, num2);
+}
