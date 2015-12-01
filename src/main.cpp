@@ -29,9 +29,10 @@ extern void combinationSumMain();
 extern void countSayMain();
 extern void phoneNumbersMain();
 extern void firstMissingPosMain();
+extern void multiplyStringsMain();
 
 int main() {
 	Heap<int> maxHeap;
-	firstMissingPosMain();
+	multiplyStringsMain();
 	return 0;
 }
