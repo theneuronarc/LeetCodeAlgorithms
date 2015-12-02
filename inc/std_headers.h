@@ -11,6 +11,7 @@
 #include <map>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unordered_map>
 #include "min_heap.h"
 
 
