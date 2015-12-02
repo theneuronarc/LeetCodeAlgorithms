@@ -34,9 +34,10 @@ extern void permMain();
 extern void perm2Main();
 extern void rotateImageMain();
 extern void groupAnagramMain();
+extern void powerMain();
 
 int main() {
 	Heap<int> maxHeap;
-	groupAnagramMain();
+	powerMain();
 	return 0;
 }
