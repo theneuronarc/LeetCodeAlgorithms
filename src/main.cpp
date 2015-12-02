@@ -33,9 +33,10 @@ extern void multiplyStringsMain();
 extern void permMain();
 extern void perm2Main();
 extern void rotateImageMain();
+extern void groupAnagramMain();
 
 int main() {
 	Heap<int> maxHeap;
-	rotateImageMain();
+	groupAnagramMain();
 	return 0;
 }
