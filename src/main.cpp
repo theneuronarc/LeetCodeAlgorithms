@@ -32,9 +32,10 @@ extern void firstMissingPosMain();
 extern void multiplyStringsMain();
 extern void permMain();
 extern void perm2Main();
+extern void rotateImageMain();
 
 int main() {
 	Heap<int> maxHeap;
-	perm2Main();
+	rotateImageMain();
 	return 0;
 }
