@@ -26,6 +26,9 @@ public:
 	}
  
 	double myPow(double x, int n) {
+		table[0] = 1.0;
+		table[1] = x;
+		tableMap[0] = table[1] = true;
 		return myPowRecurse(x, n);
 	}
 };
