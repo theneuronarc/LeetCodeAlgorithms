@@ -31,9 +31,10 @@ extern void phoneNumbersMain();
 extern void firstMissingPosMain();
 extern void multiplyStringsMain();
 extern void permMain();
+extern void perm2Main();
 
 int main() {
 	Heap<int> maxHeap;
-	permMain();
+	perm2Main();
 	return 0;
 }

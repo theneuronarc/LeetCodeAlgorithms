@@ -18,6 +18,7 @@ using namespace std;
 
 #define min(a,b) (a<b?a:b)
 #define max(a,b) (a>b?a:b)
+#define swap(a,b) {int tmp = a;a = b;b = tmp; }
 
 template<typename T>
 void printList(T& lst) {
