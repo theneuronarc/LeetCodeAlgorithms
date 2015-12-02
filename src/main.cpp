@@ -30,9 +30,10 @@ extern void countSayMain();
 extern void phoneNumbersMain();
 extern void firstMissingPosMain();
 extern void multiplyStringsMain();
+extern void permMain();
 
 int main() {
 	Heap<int> maxHeap;
-	multiplyStringsMain();
+	permMain();
 	return 0;
 }
