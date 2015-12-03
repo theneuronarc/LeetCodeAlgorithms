@@ -36,9 +36,10 @@ extern void rotateImageMain();
 extern void groupAnagramMain();
 extern void powerMain();
 extern void NQueensMain();
+extern void NQueens2Main();
 
 int main() {
 	Heap<int> maxHeap;
-	NQueensMain();
+	NQueens2Main();
 	return 0;
 }
