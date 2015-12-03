@@ -35,9 +35,10 @@ extern void perm2Main();
 extern void rotateImageMain();
 extern void groupAnagramMain();
 extern void powerMain();
+extern void NQueensMain();
 
 int main() {
 	Heap<int> maxHeap;
-	powerMain();
+	NQueensMain();
 	return 0;
 }
