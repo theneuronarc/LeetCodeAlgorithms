@@ -37,9 +37,10 @@ extern void groupAnagramMain();
 extern void powerMain();
 extern void NQueensMain();
 extern void NQueens2Main();
+extern void jumpGameMain();
 
 int main() {
 	Heap<int> maxHeap;
-	NQueens2Main();
+	jumpGameMain();
 	return 0;
 }
