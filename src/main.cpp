@@ -38,9 +38,11 @@ extern void powerMain();
 extern void NQueensMain();
 extern void NQueens2Main();
 extern void jumpGameMain();
+extern void fourSumMain();
+extern int validStringMain();
 
 int main() {
 	Heap<int> maxHeap;
-	jumpGameMain();
+	validStringMain();
 	return 0;
 }
