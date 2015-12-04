@@ -31,7 +31,6 @@ public:
 		int jumps = 1;
 
 		while (curIdx < size) {
-
 			if ((curIdx - lastIdx) > lastIdxJump) {
 				jumps++;
 				lastIdx = maxJumpIdx;
