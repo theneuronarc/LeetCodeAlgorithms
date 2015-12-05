@@ -40,9 +40,10 @@ extern void NQueens2Main();
 extern void jumpGameMain();
 extern void fourSumMain();
 extern int validStringMain();
+extern void maxSubarrayMain();
 
 int main() {
 	Heap<int> maxHeap;
-	validStringMain();
+	maxSubarrayMain();
 	return 0;
 }
