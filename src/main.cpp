@@ -37,13 +37,14 @@ extern void groupAnagramMain();
 extern void powerMain();
 extern void NQueensMain();
 extern void NQueens2Main();
-extern void jumpGameMain();
+extern void jumpGame2Main();
 extern void fourSumMain();
 extern int validStringMain();
 extern void maxSubarrayMain();
+extern void jumpGameMain();
 
 int main() {
 	Heap<int> maxHeap;
-	maxSubarrayMain();
+	jumpGameMain();
 	return 0;
 }

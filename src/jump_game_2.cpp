@@ -53,7 +53,7 @@ public:
 
 
 
-void jumpGameMain() {
+void jumpGame2Main() {
 	Solution obj;
 	vector<int> vec = { 1,1,1,1 };
 	obj.jump(vec);
