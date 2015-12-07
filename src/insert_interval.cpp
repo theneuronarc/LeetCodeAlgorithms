@@ -27,6 +27,54 @@ struct Interval {
 class Solution {
 public:
 	vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
+		vector<Interval>  res;
+		Interval cur;
+		Interval* data = intervals.data();
+		int size = intervals.size();
+		int i = 0;
 
+		if (intervals.empty()) {
+			res.push_back(newInterval);
+			return res;
+		}
+
+		while (i < size && newInterval.start > data[i].start) {
+			i++;
+		}
+
+		for (int j = 0; j < i - 1; j++)
+			res.push_back(data[j]);
+
+		if (i) {
+			if (data[i - 1].end >= newInterval.start) {
+				cur.start = data[i - 1].start;
+				cur.end = max(data[i - 1].end, newInterval.end);
+			}
+			else {
+				res.push_back(data[i-1]);
+				cur = newInterval;
+			}
+		}
+		else {
+			cur = newInterval;
+		}
+		
+
+		for (int j = i; j <= size; j++) {
+			if (j == size) {
+				res.push_back(cur);
+				break;
+			}
+
+			if (cur.end >= data[j].start) {
+				cur.end = (cur.end > data[j].end) ? cur.end : data[j].end;
+			}
+			else {
+				res.push_back(cur);
+				cur = data[j];
+			}
+		}
+
+		return res;
 	}
 };
