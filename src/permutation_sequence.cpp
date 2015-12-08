@@ -23,9 +23,23 @@ class Solution {
 public:
 	string getPermutation(int n, int k) {
 		int fct[] = { 1,1,2,6,24,120,720,5040,40320,362880 };
-		vector<int> 
-		for (int i = 0; i < n;i++)
+		char data[] = "123456789";
+		k--;
+		string res;
+		int nextIdx;
+		for (int i = n-1; i >= 0; i--) {
+			nextIdx = k / fct[i];
+			res.push_back(data[nextIdx]);
+			data[nextIdx] = '\0';
+			strcat(data, data + nextIdx + 1);
+			k = k%fct[i];		
+		}
 
-
+		return res;
 	}
 };
+
+void permSeqMain() {
+	Solution obj;
+	cout << obj.getPermutation(7, 519);
+}

@@ -42,9 +42,10 @@ extern void fourSumMain();
 extern int validStringMain();
 extern void maxSubarrayMain();
 extern void jumpGameMain();
+extern void permSeqMain();
 
 int main() {
 	Heap<int> maxHeap;
-	jumpGameMain();
+	permSeqMain();
 	return 0;
 }
