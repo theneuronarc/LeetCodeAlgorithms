@@ -43,9 +43,12 @@ extern int validStringMain();
 extern void maxSubarrayMain();
 extern void jumpGameMain();
 extern void permSeqMain();
+extern void textJustificationMain();
+extern void validNumbersMain();
+
 
 int main() {
 	Heap<int> maxHeap;
-	permSeqMain();
+	validNumbersMain();
 	return 0;
 }
