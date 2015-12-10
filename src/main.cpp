@@ -46,10 +46,12 @@ extern void permSeqMain();
 extern void textJustificationMain();
 extern void validNumbersMain();
 extern void simplifyPathMain();
+extern void climbStairsMain();
+
 
 
 int main() {
 	Heap<int> maxHeap;
-	simplifyPathMain();
+	climbStairsMain();
 	return 0;
 }
