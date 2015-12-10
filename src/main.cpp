@@ -48,9 +48,10 @@ extern void validNumbersMain();
 extern void simplifyPathMain();
 extern void climbStairsMain();
 extern void setMatZeroesMain();
+extern void set2DMatrixMain();
 
 int main() {
 	Heap<int> maxHeap;
-	setMatZeroesMain();
+	set2DMatrixMain();
 	return 0;
 }
