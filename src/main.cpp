@@ -45,10 +45,11 @@ extern void jumpGameMain();
 extern void permSeqMain();
 extern void textJustificationMain();
 extern void validNumbersMain();
+extern void simplifyPathMain();
 
 
 int main() {
 	Heap<int> maxHeap;
-	validNumbersMain();
+	simplifyPathMain();
 	return 0;
 }
