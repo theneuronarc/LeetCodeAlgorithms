@@ -48,8 +48,6 @@ extern void validNumbersMain();
 extern void simplifyPathMain();
 extern void climbStairsMain();
 
-
-
 int main() {
 	Heap<int> maxHeap;
 	climbStairsMain();

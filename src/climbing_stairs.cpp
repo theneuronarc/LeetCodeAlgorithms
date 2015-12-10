@@ -16,10 +16,8 @@ public:
 		}
 
 		return count[n];
-
 	}
 };
 
 void climbStairsMain() {
-
 }
