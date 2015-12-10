@@ -47,9 +47,10 @@ extern void textJustificationMain();
 extern void validNumbersMain();
 extern void simplifyPathMain();
 extern void climbStairsMain();
+extern void setMatZeroesMain();
 
 int main() {
 	Heap<int> maxHeap;
-	climbStairsMain();
+	setMatZeroesMain();
 	return 0;
 }
