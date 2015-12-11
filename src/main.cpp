@@ -51,9 +51,10 @@ extern void setMatZeroesMain();
 extern void set2DMatrixMain();
 extern void minWindMain();
 extern void combinationMain();
+extern void wordSearchMain();
 
 int main() {
 	Heap<int> maxHeap;
-	combinationMain();
+	wordSearchMain();
 	return 0;
 }
