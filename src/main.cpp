@@ -49,9 +49,10 @@ extern void simplifyPathMain();
 extern void climbStairsMain();
 extern void setMatZeroesMain();
 extern void set2DMatrixMain();
+extern void minWindMain();
 
 int main() {
 	Heap<int> maxHeap;
-	set2DMatrixMain();
+	minWindMain();
 	return 0;
 }
