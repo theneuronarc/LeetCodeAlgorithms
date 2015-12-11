@@ -21,10 +21,12 @@ word = "ABCB", -> returns false.
 
 #include "std_headers.h"
 
+#define TRAIL(row, col) *((trail) + (row)*(cols) + (col))
+
 class Solution {
 public:
 	bool dfs(int rows, int cols, int row, int col, int wordIdx, 
-		vector<vector<bool>>& trail, vector<vector<char>>& board, string& word) {
+		bool* trail, vector<vector<char>>& board, string& word) {
 		
 		if (wordIdx >= word.size())
 			return true;
@@ -41,26 +43,26 @@ public:
 				if (row + x < 0 || row + x >= rows)
 					continue;
 
-				if (trail[row + x][col])
+				if (TRAIL(row + x,col))
 					continue;
 
-				trail[row+x][col] = true;
+				TRAIL(row + x, col) = true;
 				if (dfs(rows, cols, row + x, col, wordIdx + 1, trail, board, word))
 					return true;			
-				trail[row + x][col] = false;
+				TRAIL(row + x, col) = false;
 		}
 
 		for (int y = -1; y < 2; y += 2) {
 				if (col + y < 0 || col + y >= cols)
 					continue;
 
-				if (trail[row][col + y])
+				if (TRAIL(row, col+y))
 					continue;
 
-				trail[row][col+y] = true;
+				TRAIL(row, col + y) = true;
 				if (dfs(rows, cols, row, col + y, wordIdx + 1, trail,  board, word))
 					return true;			
-				trail[row][col + y] = false;
+				TRAIL(row, col + y) = false;
 		}
 
 		return false;
@@ -75,13 +77,15 @@ public:
 		if (!cols)
 			return false;
 
+		bool* trail = (bool*) calloc(rows*cols, sizeof(bool));
+
 		vector<vector<bool>> trail(rows, vector<bool>(cols, false));
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
-				trail[row][col] = true;
+				TRAIL(row, col) = true;
 				if (dfs(rows, cols, row, col, 0, trail, board, word))
 					return true;
-				trail[row][col] = false;
+				TRAIL(row, col) = false;
 			}
 		}
 
