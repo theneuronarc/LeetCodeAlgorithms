@@ -50,9 +50,10 @@ extern void climbStairsMain();
 extern void setMatZeroesMain();
 extern void set2DMatrixMain();
 extern void minWindMain();
+extern void combinationMain();
 
 int main() {
 	Heap<int> maxHeap;
-	minWindMain();
+	combinationMain();
 	return 0;
 }
