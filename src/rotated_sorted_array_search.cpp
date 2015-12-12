@@ -5,30 +5,69 @@
 
 class Solution {
 public:
-	int binarySearch(int* arr, int startIdx, int endIdx, int target) {		
-		int midPoint = -1;
-		int range = (endIdx - startIdx + 1);
-
+	int searchRec(int* data, int startIdx, int endIdx, int target) {
 		if (startIdx > endIdx)
 			return -1;
 
-		while (range) {
-			//range >>= 1;
-			midPoint = startIdx + range/2;
-			if (target == arr[midPoint])
-				return midPoint;
+		int pivot = data[startIdx];
+		int midPoint = startIdx + (endIdx - startIdx) / 2;
+		int midVal = data[midPoint];
 
-			if (target > arr[midPoint]) {
+		if (target == pivot)
+			return startIdx;
+
+		if (target == midVal)
+			return midPoint;
+
+		if (midVal > pivot) {
+			if (target > pivot) {
+				if (target < midVal)
+					endIdx = midPoint - 1;
+				else
+					startIdx = midPoint + 1;
+			}
+			else if (target < pivot) {
 				startIdx = midPoint + 1;
-				range = (range - 1) >> 1;
 			}
 			else {
-				range >>= 1;
+				return true;
 			}
 		}
-		return -1;
+		else if (midVal < pivot) {
+			if (target < pivot) {
+				if (target < midVal)
+					endIdx = midPoint - 1;
+				else
+					startIdx = midPoint + 1;
+			}
+			else if (target > pivot) {
+				endIdx = midPoint - 1;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			if (data[startIdx] == data[endIdx]) {
+				startIdx++;
+				endIdx--;
+			}
+			else
+				startIdx = midPoint + 1;
+		}
+
+		return searchRec(data, startIdx, endIdx, target);
+
 	}
 
+	int search(vector<int>& nums, int target) {
+		return searchRec(nums.data(), 0, nums.size() - 1, target);
+	}
+};
+
+class Solution {
+public:
+	
 	int binarySearch1(int arr[], int l, int r, int x)
 	{
 		while (l <= r)
