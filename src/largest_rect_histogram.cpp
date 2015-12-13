@@ -9,38 +9,55 @@ class Solution {
 public:
 	int largestRectangleArea(vector<int>& height) {
 		int size = height.size();
-		int* range = new int[size];
-		int* data = height.data();
-		std::stack<int> boundary;
+		int* leftRange = new int[size];
+		int* rightRange = new int[size];
+		int tmpIdx = 0;
 
-		boundary.push(0);
-		range[0] = 0;
+		leftRange[0] = 0;
+		rightRange[size - 1] = size - 1;
 
 		for (int i = 1; i < size; i++) {
-			if (height[boundary.top()] < height[i])
-				boundary.push(i);
+			if (height[i] <= height[i - 1]) {
+				leftRange[i] = leftRange[i - 1];
+				tmpIdx = leftRange[i - 1];
+				while (tmpIdx >= 0 ) {
+					if (height[i] <= height[tmpIdx]) {
+						leftRange[i] = tmpIdx;
+					}
+					else
+						break;
+					tmpIdx--;
+				}
+			}
+			else{
+				leftRange[i] = i;
+			}
+		}
+
+		for (int i = size - 2; i >= 0; i--) {
+			if (height[i] > height[i + 1]) {
+				rightRange[i] = i;
+			}
 			else {
-				while (!boundary.empty() && height[boundary.top()] >= height[i]) {
-					range[i] = boundary.top();
-					boundary.pop();
+				tmpIdx = rightRange[i + 1];
+				rightRange[i] = rightRange[i + 1];
+				while (tmpIdx < size) {
+					if (height[i] <= height[tmpIdx]) {
+						rightRange[i] = tmpIdx;
+					}
+					else
+						break;
+					tmpIdx++;
 				}
 			}
 		}
 
-		boundary.;
-
-
-		for (int i = 1; i < size; i++) {
-			if (height[boundary.top()] < height[i])
-				boundary.push(i);
-			else {
-				while (!boundary.empty() && height[boundary.top()] >= height[i]) {
-					range[i] = boundary.top();
-					boundary.pop();
-				}
-			}
+		int maxArea = 0;
+		for (int i = 0; i < size; i++) {
+			maxArea = max(maxArea, height[i] * (rightRange[i] - leftRange[i] + 1));
 		}
 
+		return maxArea;
 	}
 };
 
