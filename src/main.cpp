@@ -52,9 +52,10 @@ extern void set2DMatrixMain();
 extern void minWindMain();
 extern void combinationMain();
 extern void wordSearchMain();
+extern void ssdMain();
 
 int main() {
 	Heap<int> maxHeap;
-	wordSearchMain();
+	ssdMain();
 	return 0;
 }
