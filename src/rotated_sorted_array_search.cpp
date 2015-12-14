@@ -65,10 +65,10 @@ public:
 	}
 };
 
-class Solution {
+class Solution2 {
 public:
 	
-	int binarySearch1(int arr[], int l, int r, int x)
+	int binarySearch(int arr[], int l, int r, int x)
 	{
 		while (l <= r)
 		{

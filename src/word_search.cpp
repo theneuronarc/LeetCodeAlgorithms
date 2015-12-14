@@ -79,7 +79,7 @@ public:
 
 		bool* trail = (bool*) calloc(rows*cols, sizeof(bool));
 
-		vector<vector<bool>> trail(rows, vector<bool>(cols, false));
+		//vector<vector<bool>> trail(rows, vector<bool>(cols, false));
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
 				TRAIL(row, col) = true;
@@ -96,6 +96,6 @@ public:
 void wordSearchMain() {
 	Solution obj;
 	vector<vector<char>> board;
-	board.data()
+	board.data();
 	obj.exist(board, "aaa");
 }

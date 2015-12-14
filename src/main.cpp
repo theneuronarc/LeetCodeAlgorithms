@@ -53,9 +53,10 @@ extern void minWindMain();
 extern void combinationMain();
 extern void wordSearchMain();
 extern void ssdMain();
+extern void resIPMain();
 
 int main() {
 	Heap<int> maxHeap;
-	ssdMain();
+	resIPMain();
 	return 0;
 }

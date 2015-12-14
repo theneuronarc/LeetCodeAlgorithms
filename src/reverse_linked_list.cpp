@@ -24,16 +24,35 @@ struct ListNode {
 
 class Solution {
 public:
-	ListNode* reverseBetween(ListNode* head, int m, int n) {
-		ListNode* current = head;
-		ListNode* next = head->next;
+	ListNode* reverseBetween(ListNode* list, int m, int n) {
+		ListNode* current = list;
+		ListNode* next = NULL;
 		ListNode* prev = NULL;
 
-		while (current) {
+		ListNode** head = &list;
+		ListNode* tail = list;
+
+		int cnt = 1;
+
+		while (current && cnt <= n) {
+			if (cnt < m) {
+				head = &current->next;
+				current = current->next;
+				tail = current;
+				cnt++;				
+				continue;
+			}
+
 			next = current->next;
 			current->next = prev;
 			prev = current;
 			current = next;
+			cnt++;
 		}
+
+		if(tail) tail->next = current;
+		*head = prev;
+
+		return list;
 	}
 };
