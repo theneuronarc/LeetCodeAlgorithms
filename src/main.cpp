@@ -54,9 +54,10 @@ extern void combinationMain();
 extern void wordSearchMain();
 extern void ssdMain();
 extern void resIPMain();
+extern void uniqueBSTMain();
 
 int main() {
 	Heap<int> maxHeap;
-	resIPMain();
+	uniqueBSTMain();
 	return 0;
 }
