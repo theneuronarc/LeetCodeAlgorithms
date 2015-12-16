@@ -55,9 +55,10 @@ extern void wordSearchMain();
 extern void ssdMain();
 extern void resIPMain();
 extern void uniqueBSTMain();
+extern void interleavingStringsMain();
 
 int main() {
 	Heap<int> maxHeap;
-	uniqueBSTMain();
+	interleavingStringsMain();
 	return 0;
 }

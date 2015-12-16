@@ -29,10 +29,6 @@ public:
 		return table[n];
 	}
 
-	void generateTrees(int nodeCount, vector<vector<string>> serializedTrees) {
-		                                                                                                                                                        
-	}
-
 	void genTreesRec(int start, int end, vector<TreeNode*>& res) {
 		vector<TreeNode*> leftTrees;
 		vector<TreeNode*> rightTrees;
