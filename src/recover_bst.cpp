@@ -25,7 +25,7 @@ typedef struct {
 }bstResult;
 
 
-class Solution {
+class Solution1 {
 public:
 	bool isSameTree(TreeNode* p, TreeNode* q) {
 		if ((bool)p ^ (bool)q)
@@ -51,92 +51,64 @@ public:
 
 		return true;
 	}
+};
 
-	TreeNode* findLCA(TreeNode* root, bstResult& res) {
-		bstResult leftRes = { 0 };
-		bstResult rightRes = { 0 };
-		TreeNode* LCA;
-
-		if (!(root->left || root->right)) {
-			res.valid = true;
-			res.largest = root->val;
-			res.smallest = root->val;
-			return 0;
-		}
-
-		if (root->left) {
-			LCA = findLCA(root->left, leftRes);
-			if (LCA)
-				return LCA;
-
-			if (leftRes.valid && leftRes.largest > root->val) {
-				leftRes.valid = false;				
-			}
-		}
-		else
-			leftRes.valid = true;
-
-		if (root->right) {
-			LCA = findLCA(root->right, rightRes);
-			if (LCA)
-				return LCA;
-
-			if (rightRes.valid && rightRes.smallest < root->val) {
-				res.valid = false;
-			}
-		}
-
-		res.valid = (leftRes.valid && rightRes.valid);
-
-		if (res.valid) {
-			res.smallest = (root->left ? leftRes.smallest : root->val);
-			res.largest = (root->right ? rightRes.largest : root->val);
-		}
-
-		if (!leftRes.valid && !rightRes.valid)
-			return root;
-		else
-			return 0;
-
-	}
-
-	TreeNode* preOrder(TreeNode* root) {
-		TreeNode* badNode;
+class Solution {
+public:
+	TreeNode* recover(TreeNode* root, TreeNode* prev, TreeNode** first, TreeNode** second, bool& isFirst) {
 		if (!root)
 			return NULL;
 
-		if (root->left && root->val < root->left->val)
-			badNode = preOrder(root->left);
-		else
-			badNode = root->left;
+		if (!root->left && !root->right) {
+			if (prev != NULL) {
+				if (prev->val > root->val) {
+					if (isFirst) {
+						*first = prev;
+						*second = root;
+						isFirst = false;
+						//cout << "1 : " << prev->val << " " << root->val<< endl;
+					}
+					else {
+						*second = root;
+						//cout << "2 : " << root->val<< endl;
+					}
+				}
+			}
+			return root;
+		}
 
-		if (badNode)
-			return badNode;
+		TreeNode* prevLeft = recover(root->left, prev, first, second, isFirst);
+		prev = (prevLeft ? prevLeft : prev);
+		if (prev != NULL) {
+			if (prev->val > root->val) {
+				if (isFirst) {
+					*first = prev;
+					*second = root;
+					isFirst = false;
+					//cout << "3 : " << prev->val << " " << root->val << endl;
+				}
+				else {
+					*second = root;
+					//cout << "4 : " << root->val<< endl;
+				}
+			}
+		}
 
-		if (root->right && root->val > root->right->val)
-			badNode = preOrder(root->right);
-		else
-			badNode = root->right;
+		prev = root;
 
-		if (badNode)
-			return badNode;
-		else
-			return 0;
-	}
-
-	void recover(TreeNode* LCA) {
-		TreeNode* tmp;
-		TreeNode* left = preOrder(LCA->left);
-		TreeNode* right = preOrder(LCA->right);
-
-		tmp = left;
-		left = right;
-		right = tmp;
+		TreeNode* prevRight = recover(root->right, prev, first, second, isFirst);
+		prevRight = (prevRight ? prevRight : root);
+		return prevRight;
 	}
 
 	void recoverTree(TreeNode* root) {
-		bstResult res;
-		TreeNode* LCA = findLCA(root, res);
-		recover(LCA);
-	}	
+		TreeNode *first = 0, *second = 0;
+		bool isFirst = true;
+		recover(root, NULL, &first, &second, isFirst);
+		if (first && second) {
+			int tmp = first->val;
+			first->val = second->val;
+			second->val = tmp;
+		}
+	}
 };
