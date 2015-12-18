@@ -56,9 +56,10 @@ extern void ssdMain();
 extern void resIPMain();
 extern void uniqueBSTMain();
 extern void interleavingStringsMain();
+extern void scrambledStringMain();
 
 int main() {
 	Heap<int> maxHeap;
-	interleavingStringsMain();
+	scrambledStringMain();
 	return 0;
 }

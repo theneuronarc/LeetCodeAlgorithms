@@ -13,13 +13,6 @@ Both the left and right subtrees must also be binary search trees.
 #include "std_headers.h"
 
 
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
-
 typedef struct {
 	bool valid;
 	int smallest;

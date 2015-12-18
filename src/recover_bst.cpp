@@ -11,12 +11,6 @@ A solution using O(n) space is pretty straight forward. Could you devise a const
 
 #include "std_headers.h"
 
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
 
 typedef struct {
 	bool valid;
