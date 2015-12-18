@@ -1,80 +1,61 @@
 #include "std_headers.h"
 
+#define MAX_SIZE 64
 
-#define MAX_SIZE 128
 class Solution {
-
-
 public:
-	bool isScrambleDFS(string s1, string s2, int A[MAX_SIZE][MAX_SIZE], int B[MAX_SIZE][MAX_SIZE]) {
-		cout << "s1:" << s1 << "  " << "s2:" << s2 << endl;
-		int n = s1.size();
-		bool res[4];
-		if (n == 0)
+	bool isScramble(string A, string B) {
+		int n = A.size();
+		int table[MAX_SIZE][MAX_SIZE][MAX_SIZE] = { 0 };
+		int len = 1;
+		int partitionLen;
+		if (!n)
 			return true;
 
-		if (n == 1) {
-			if (s1[0] == s2[0])
-				return true;
-			else
-				return false;
+		for (int aStart = 0; aStart <= n - len; aStart++) {
+			for (int bStart = 0; bStart <= n - len; bStart++) {
+				if (A[aStart] == B[bStart])
+					table[len - 1][aStart][bStart] = 1;
+				else
+					table[len - 1][aStart][bStart] = -1;
+			}
 		}
 
-		for (int i = 0; i < n - 1; i++) {
-			if (A[0][i])
-				res[0] = A[0][i] == -1 ? false : true;
-			else {
-				res[0] = isScramble(s1.substr(0, i + 1), s2.substr(0, i + 1));
-				A[0][i] = res[0] ? 1 : -1;
-			}
+		len++;
 
-			if (res[0]) {
-				if (A[i + 1][n - 1])
-					res[1] = A[i + 1][n - 1] == -1 ? false : true;
-				else {
-					res[1] = isScramble(s1.substr(i + 1, n - i - 1), s2.substr(i+1, n - i - 1));
-					A[i + 1][n - 1] = res[1] ? 1 : -1;
+		for (; len <= n; len++) {
+			for (int aStart = 0; aStart <= n - len; aStart++) {
+				for (int bStart = 0; bStart <= n - len; bStart++) {
+					for (int partitionLen = 1; partitionLen < len; partitionLen++) {
+						/*printf("\nl:%d, aStart = %d, bStart = %d pl = %d (1) (%d, %d) (%d,%d) (2) (%d, %d) (%d,%d)",
+						len, aStart, bStart, partitionLen, aStart, bStart, aStart + partitionLen, bStart + partitionLen,
+						aStart, bStart + len - partitionLen, aStart + partitionLen, bStart);*/
+						if (
+							(table[partitionLen - 1][aStart][bStart] == 1 &&
+								table[len - partitionLen - 1][aStart + partitionLen][bStart + partitionLen] == 1) ||
+
+							(table[partitionLen - 1][aStart][bStart + len - partitionLen] == 1 &&
+								table[len - partitionLen - 1][aStart + partitionLen][bStart] == 1)
+							)
+						{
+							table[len - 1][aStart][bStart] = 1;
+							break;
+						}
+						else
+						{
+							table[len - 1][aStart][bStart] = -1;
+						}
+					}
+					//printf("\n=> %d",table[len - 1][aStart][bStart]);
 				}
 			}
-			cout << res[0] << " " << res[1] << endl;
-
-			if (res[0] && res[1])
-				return true;
-
-			if (B[0][i])
-				res[2] = B[0][i] == -1 ? false : true;
-			else {
-				res[2] = isScramble(s1.substr(0, i + 1), s2.substr(n - i - 1, i + 1));
-				B[0][i] = res[2] ? 1 : -1;
-			}
-			if (res[2]) {
-				if (B[i + 1][n - 1])
-					res[3] = B[i + 1][n - 1] == -1 ? false : true;
-				else {
-					res[3] = isScramble(s1.substr(i + 1, n - i - 1), s2.substr(0, n - i - 1));
-					B[i + 1][n - 1] = res[3] ? 1 : -1;
-				}
-			}
-
-			cout << res[2] << " " << res[3] << endl;
-
-			if (res[2] && res[3])
-				return true;
 		}
 
-		return false;
-	}
-
-	bool isScramble(string s1, string s2) {
-		int A[MAX_SIZE][MAX_SIZE] = { 0 };
-		int B[MAX_SIZE][MAX_SIZE] = { 0 };
-		return isScrambleDFS(s1, s2, A, B);
-
+		return (table[n - 1][0][0] == 1 ? true : false);
 	}
 };
+
 void scrambledStringMain() {
 	Solution obj;
-	
-		
-	obj.isScramble("abcdefghij", "efghijcadb");
+	obj.isScramble("great", "rgtae");
 }
