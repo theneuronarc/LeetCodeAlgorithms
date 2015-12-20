@@ -57,9 +57,10 @@ extern void resIPMain();
 extern void uniqueBSTMain();
 extern void interleavingStringsMain();
 extern void scrambledStringMain();
+extern void inorederPreOrderMain();
 
 int main() {
 	Heap<int> maxHeap;
-	scrambledStringMain();
+	inorederPreOrderMain();
 	return 0;
 }
