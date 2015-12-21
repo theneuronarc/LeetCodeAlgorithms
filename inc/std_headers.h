@@ -17,6 +17,10 @@
 
 using namespace std;
 
+typedef struct TreeNode TreeNode;
+
+typedef struct ListNode ListNode;
+
 #define min(a,b) (a<b?a:b)
 #define max(a,b) (a>b?a:b)
 #define swap(a,b) {int tmp = a;a = b;b = tmp; }
@@ -34,4 +38,9 @@ struct TreeNode {
 	TreeNode *left;
 	TreeNode *right;
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+struct ListNode {
+	int val;
+	struct ListNode *next;
 };
