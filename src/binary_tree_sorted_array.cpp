@@ -115,3 +115,36 @@ int** pathSum(struct TreeNode* root, int sum, int** columnSizes, int* returnSize
 	printf("\n%d", *returnSize);
 	return paths;
 }
+
+TreeNode* flattenDFS(struct TreeNode* root) {
+	if (!root)
+		return NULL;
+
+	if (!root->left && !root->right) {
+		return root;
+	}
+	TreeNode* rightMost;
+	TreeNode* rightmostLeft = flattenDFS(root->left);
+	TreeNode* rightmostRight = flattenDFS(root->right);
+
+	printf("\n%d %x %x", root->val, rightmostLeft, rightmostRight);
+
+	if (root->left) {
+		rightmostLeft->right = root->right;
+		if (root->right)
+			rightMost = rightmostRight;
+		else
+			rightMost = rightmostLeft;
+		root->right = root->left;
+	}
+	else {
+		rightMost = rightmostRight;
+	}
+
+	root->left = NULL;
+	return rightMost;
+}
+
+void flatten(struct TreeNode* root) {
+	flattenDFS(root);
+}
