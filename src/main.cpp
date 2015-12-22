@@ -58,9 +58,10 @@ extern void uniqueBSTMain();
 extern void interleavingStringsMain();
 extern void scrambledStringMain();
 extern void inorederPreOrderMain();
+extern void pascalTriangleMain();
 
 int main() {
 	Heap<int> maxHeap;
-	inorederPreOrderMain();
+	pascalTriangleMain();
 	return 0;
 }

@@ -4,6 +4,11 @@ https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 
 #include "std_headers.h"
 
+struct ListNode {
+	int val;
+	struct ListNode *next;
+};
+
 struct TreeNode* sortedArrayToBST(int* nums, int numsSize) {
 	if (!numsSize)
 		return NULL;

@@ -1,7 +1,5 @@
 #include "std_headers.h"
 
-typedef struct TreeNode TreeNode;
-
 int search(int* data, int size, int val) {
 	for (int i = 0; i < size; i++) {
 		if (data[i] == val)

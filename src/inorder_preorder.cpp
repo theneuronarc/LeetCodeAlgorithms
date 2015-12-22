@@ -2,11 +2,8 @@
 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 */
 #include "std_headers.h"
-typedef struct TreeNode TreeNode;
 
-typedef struct TreeNode TreeNode;
-
-TreeNode* buildTree(int* preorder, int preorderSize, int* inorder, int inorderSize) {
+TreeNode* buildTree1(int* preorder, int preorderSize, int* inorder, int inorderSize) {
 	int pIdx = 0;
 	int iIdx = 0;
 
@@ -65,5 +62,5 @@ void inorederPreOrderMain() {
 	int preorder[] = { 1,2,3};
 	int inOrder[] = { 2,1,3};
 
-	buildTree(preorder, 3, inOrder, 3);
+	buildTree1(preorder, 3, inOrder, 3);
 }
