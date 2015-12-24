@@ -54,29 +54,3 @@ void pascalTriangleMain() {
 	int size;
 	getRow(3, &size);
 }
-
-void preOrderTriangle(int row, int col, int curSum, int* minSum, int** triangle, int triangleRowSize, int *triangleColSizes) {
-	//printf("\n%d %d %d", row, col, curSum);
-	if (row >= triangleRowSize || col >= triangleColSizes[row])
-		return;
-
-	int* curRow = triangle[row];
-
-	if (row == triangleRowSize - 1) {
-		if (curSum + curRow[col] < *minSum)
-			*minSum = curSum + curRow[col];
-	}
-
-	preOrderTriangle(row + 1, col, curSum + curRow[col], minSum, triangle, triangleRowSize, triangleColSizes);
-	preOrderTriangle(row + 1, col + 1, curSum + curRow[col], minSum, triangle, triangleRowSize, triangleColSizes);
-}
-
-
-int minimumTotal(int** triangle, int triangleRowSize, int *triangleColSizes) {
-	if (!triangleRowSize || !triangleColSizes[0])
-		return 0;
-	int* path = (int*)malloc(sizeof(int)*triangleRowSize);
-	int minSum = INT_MAX;
-	preOrderTriangle(0, 0, 0, &minSum, triangle, triangleRowSize, triangleColSizes);
-	return minSum;
-}
