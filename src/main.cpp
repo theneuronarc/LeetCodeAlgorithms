@@ -59,9 +59,11 @@ extern void interleavingStringsMain();
 extern void scrambledStringMain();
 extern void inorederPreOrderMain();
 extern void pascalTriangleMain();
+extern void findLaddersMain();
+extern void wordLadderMain();
 
 int main() {
 	Heap<int> maxHeap;
-	pascalTriangleMain();
+	wordLadderMain();
 	return 0;
 }
