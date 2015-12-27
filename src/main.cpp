@@ -61,9 +61,11 @@ extern void inorederPreOrderMain();
 extern void pascalTriangleMain();
 extern void findLaddersMain();
 extern void wordLadderMain();
+extern void palPartMain();
+extern void cloneGraphMain();
 
 int main() {
 	Heap<int> maxHeap;
-	wordLadderMain();
+	cloneGraphMain();
 	return 0;
 }

@@ -51,3 +51,4 @@ typedef struct TreeLinkNode {
 	int val;
 	struct TreeLinkNode *left, *right, *next;	
 }TreeLinkNode;
+
