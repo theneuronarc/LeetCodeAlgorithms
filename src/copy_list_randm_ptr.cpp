@@ -4,6 +4,7 @@ https://leetcode.com/problems/copy-list-with-random-pointer/
 #include "std_headers.h"
 typedef struct RandomListNode RandomListNode;
 
+
 struct RandomListNode *copyRandomList(struct RandomListNode *head) {
 	// Copy original List and create a Map
 	RandomListNode* current = head;
@@ -38,7 +39,9 @@ struct RandomListNode *copyRandomList(struct RandomListNode *head) {
 
 	current = head;
 	while (current != NULL) {
+		prev = current->random->next;
 		current->random->next = current->next ? current->next->random : NULL;
+		current->random = prev;
 		current = current->next;
 	}
 

@@ -63,9 +63,10 @@ extern void findLaddersMain();
 extern void wordLadderMain();
 extern void palPartMain();
 extern void cloneGraphMain();
+extern void wordBreakMain();
 
 int main() {
 	Heap<int> maxHeap;
-	cloneGraphMain();
+	wordBreakMain();
 	return 0;
 }
