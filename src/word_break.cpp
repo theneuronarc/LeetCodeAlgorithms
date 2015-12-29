@@ -6,7 +6,7 @@ https://leetcode.com/problems/word-break/
 
 class Solution {
 public:
-	bool wordBreak(string s, unordered_set<string>& wordDict) {
+	bool wordBreakCheck(string& s, unordered_set<string>& wordDict) {
 		int size = s.size();
 		vector<bool> tableDP(size, false);
 		for (int i = 0; i < size; i++) {
@@ -21,16 +21,46 @@ public:
 				}
 			}
 		}
-
 		return tableDP[size - 1];
+	}
+
+	vector<string> wordBreak2(string s, unordered_set<string>& wordDict) {
+		int size = s.size();
+		vector<string> res;
+		vector<vector<string>> tableDP(size, vector<string>());	
+		if (!wordBreakCheck(s, wordDict))
+			return res;
+
+		if (wordDict.count(s.substr(size - 1, 1))) {
+			tableDP[size - 1].push_back(s.substr(size - 1, 1));
+		}
+
+		for (int i = size - 2; i >= 0; i--) {
+			if (wordDict.count(s.substr(i, size - i))) {
+				tableDP[i].push_back(s.substr(i, size - i));
+			}
+
+			for (int j = i + 1; j < size; j++) {
+				cout << i << " " << j << endl;
+				if (!tableDP[j].empty() && wordDict.count(s.substr(i, j - i))) {
+					for (int k = 0; k < tableDP[j].size(); k++) {
+						string t = s.substr(i, j - i) + " " + tableDP[j][k];
+						tableDP[i].push_back(t);
+					}
+				}
+			}
+		}
+		
+		return tableDP[0];
 	}
 };
 
 void wordBreakMain() {
-	//string s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+	//string s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
 	//unordered_set<string> wordDict = { "a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa" };
-	string s = "leetcode";
-	unordered_set<string> wordDict = { "leet", "code" };
+	string s = "catsanddog";
+	unordered_set<string> wordDict = { "cat", "cats", "and", "sand", "dog" };
 	Solution obj;
-	cout << "result = " << obj.wordBreak(s, wordDict) << endl;
+	
+	printList(obj.wordBreak2(s, wordDict));
 }
