@@ -10,7 +10,7 @@ typedef struct ListNode {
 
 ListNode* reverseList(ListNode* head, ListNode* prev) {
 	if (!head)
-		return;
+		return 0;
 
 	ListNode* cur = head, *next = cur->next;	
 

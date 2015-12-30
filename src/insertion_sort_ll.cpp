@@ -29,7 +29,7 @@ ListNode* findMinimum(ListNode** head){
 	return min;
 }
 
-struct ListNode* insertionSortList(struct ListNode* head) {
+struct ListNode* insertionSortList2(struct ListNode* head) {
 	ListNode* sorted, *unsorted = head;
 	head = sorted = (ListNode*)malloc(sizeof(ListNode));
 	sorted->next = 0;	

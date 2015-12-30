@@ -64,9 +64,10 @@ extern void wordLadderMain();
 extern void palPartMain();
 extern void cloneGraphMain();
 extern void wordBreakMain();
+extern void LRUCacheMain();
 
 int main() {
 	Heap<int> maxHeap;
-	wordBreakMain();
+	LRUCacheMain();
 	return 0;
 }
