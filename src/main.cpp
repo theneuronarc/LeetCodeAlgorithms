@@ -65,9 +65,12 @@ extern void palPartMain();
 extern void cloneGraphMain();
 extern void wordBreakMain();
 extern void LRUCacheMain();
+extern void revWordsMain();
+extern int SBMain();
+extern void minRotArr();
 
 int main() {
 	Heap<int> maxHeap;
-	LRUCacheMain();
+	minRotArr();
 	return 0;
 }
