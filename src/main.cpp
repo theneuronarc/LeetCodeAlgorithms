@@ -68,9 +68,11 @@ extern void LRUCacheMain();
 extern void revWordsMain();
 extern int SBMain();
 extern void minRotArr();
+extern void compareVersionMain();
+extern void recDecimal();
 
 int main() {
 	Heap<int> maxHeap;
-	minRotArr();
+	recDecimal();
 	return 0;
 }
