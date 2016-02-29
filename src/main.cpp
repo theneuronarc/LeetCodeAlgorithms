@@ -71,8 +71,9 @@ extern void minRotArr();
 extern void compareVersionMain();
 extern void recDecimal();
 
+extern void trueMain();
+
 int main() {
-	Heap<int> maxHeap;
-	recDecimal();
+	trueMain();
 	return 0;
 }
