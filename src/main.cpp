@@ -73,7 +73,7 @@ extern void recDecimal();
 
 extern void trueMain();
 
+
 int main() {
-	trueMain();
 	return 0;
 }

@@ -1,14 +1,10 @@
-/*
-https://leetcode.com/problems/course-schedule/
-*/
-
-bool DFS(char* graph, int vertexCount, char* color, int source, int* schedule, int* start) {
+bool DFS(int* graph, int vertexCount, int* color, int source, int* schedule, int* start) {
 	for (int i = 0; i < vertexCount; i++) {
 		int present = *(graph + vertexCount*source + i);
 		if (present) {
 			if (!color[i]) {
 				color[i] = 1;
-				if (DFS(graph, vertexCount, color, i,schedule, start))
+				if (DFS(graph, vertexCount, color, i, schedule, start))
 					return true;
 				schedule[(*start)++] = i;
 				color[i] = 2;
@@ -24,8 +20,8 @@ bool DFS(char* graph, int vertexCount, char* color, int source, int* schedule, i
 }
 
 
-bool isCycle(char* graph, int vertexCount, int* schedule) {
-	char* color = (char*)calloc(vertexCount, sizeof(char));
+bool isCycle(int* graph, int vertexCount, int* schedule) {
+	int* color = (int*)calloc(vertexCount, sizeof(int));
 	int start = 0;
 	for (int i = 0; i < vertexCount; i++) {
 		if (!color[i]) {
@@ -40,30 +36,8 @@ bool isCycle(char* graph, int vertexCount, int* schedule) {
 	return false;
 }
 
-
-
-bool canFinish(int numCourses, int** prerequisites, int prerequisitesRowSize, int prerequisitesColSize) {
-	char* graph = (int*)calloc(numCourses*numCourses, sizeof(char));
-	int* schedule = (int*)malloc(sizeof(int)*numCourses);
-	int a, b;
-	int res;
-	for (int i = 0; i < prerequisitesRowSize; i++) {
-		a = prerequisites[i][0];
-		b = prerequisites[i][1];
-		*(graph + numCourses*a + b) = 1;
-	}
-	res = !isCycle(graph, numCourses, schedule);
-	for (int i = 0; i < numCourses / 2; i++) {
-		int tmp = schedule[i];
-		schedule[i] = schedule[numCourses - i - 1];
-		schedule[numCourses - i - 1] = tmp;
-	}
-	free(graph);
-	return res;
-}
-
 int* findOrder(int numCourses, int** prerequisites, int prerequisitesRowSize, int prerequisitesColSize, int* returnSize) {
-	char* graph = (int*)calloc(numCourses*numCourses, sizeof(char));
+	int* graph = (int*)calloc(numCourses*numCourses, sizeof(int));
 	int* schedule = (int*)malloc(sizeof(int)*numCourses);
 	int a, b;
 	int res;
@@ -72,7 +46,9 @@ int* findOrder(int numCourses, int** prerequisites, int prerequisitesRowSize, in
 		b = prerequisites[i][1];
 		*(graph + numCourses*a + b) = 1;
 	}
+
 	res = !isCycle(graph, numCourses, schedule);
+
 	for (int i = 0; i < numCourses / 2; i++) {
 		int tmp = schedule[i];
 		schedule[i] = schedule[numCourses - i - 1];
@@ -81,10 +57,13 @@ int* findOrder(int numCourses, int** prerequisites, int prerequisitesRowSize, in
 
 	free(graph);
 
-	if (res) {
+	if (res)
 		*returnSize = numCourses;
-	}
-	else
+	else {
 		*returnSize = 0;
+		free(schedule);
+		schedule = 0;
+	}
+
 	return schedule;
 }
