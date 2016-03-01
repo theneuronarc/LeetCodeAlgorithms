@@ -72,8 +72,10 @@ extern void compareVersionMain();
 extern void recDecimal();
 
 extern void trueMain();
+extern void graphMain();
 
 
 int main() {
+	graphMain();
 	return 0;
 }

@@ -1,8 +1,4 @@
-/*
-
-*/
-#include "std_headers.h"
-
+#define printf(...)
 struct Vertex;
 
 typedef struct ListNodeX {
@@ -10,7 +6,7 @@ typedef struct ListNodeX {
 	struct ListNodeX* next;
 }ListNodeX;
 
-typedef struct Vertex{
+typedef struct Vertex {
 	int val;
 	int color;
 	int outDegree;
@@ -18,7 +14,7 @@ typedef struct Vertex{
 }Vertex;
 
 typedef struct {
-	int vertexCount;	
+	int vertexCount;
 	Vertex** vertexList;
 }Graph;
 
@@ -36,21 +32,21 @@ Graph* createGraph(int numCourses, int** prerequisites, int prerequisitesRowSize
 	}
 
 	int a, b;
-	
+
 	for (int i = 0; i < prerequisitesRowSize; i++) {
 		a = prerequisites[i][0];
 		b = prerequisites[i][1];
 		ListNodeX* n = (ListNodeX*)malloc(sizeof(ListNodeX));
-		n->v = graph->vertexList[b];		
+		n->v = graph->vertexList[b];
 		n->next = graph->vertexList[a]->head;
-		graph->vertexList[a]->head = n;		
+		graph->vertexList[a]->head = n;
 		graph->vertexList[a]->outDegree++;
 	}
 
 	return graph;
 }
 
-void destroyGraph(Graph* graph){
+void destroyGraph(Graph* graph) {
 	for (int i = 0; i < graph->vertexCount; i++) {
 		if (graph->vertexList[i]) {
 			ListNodeX*tmp, *node = graph->vertexList[i]->head;
@@ -76,7 +72,7 @@ bool DFS(Graph* graph, int source, int* schedule, int* start) {
 	while (node) {
 		if (!node->v->color) {
 			node->v->color = 1;
-			if (DFS(graph, source, schedule, start))
+			if (DFS(graph, node->v->val, schedule, start))
 				return true;
 			node->v->color = 2;
 			schedule[(*start)++] = node->v->val;
@@ -86,12 +82,14 @@ bool DFS(Graph* graph, int source, int* schedule, int* start) {
 				return true;
 			}
 		}
+		node = node->next;
 	}
 	return false;
 }
 
 bool graphTraversal(Graph* graph, int* schedule) {
 	int start = 0;
+	printf("\nCreate Graph");
 	for (int i = 0; i < graph->vertexCount; i++) {
 		if (!graph->vertexList[i]->color) {
 			graph->vertexList[i]->color = 1;
@@ -102,18 +100,19 @@ bool graphTraversal(Graph* graph, int* schedule) {
 			schedule[start++] = i;
 		}
 	}
-
+	/*
 	for (int i = 0; i <  graph->vertexCount / 2; i++) {
-		int tmp = schedule[i];
-		schedule[i] = schedule[graph->vertexCount - i - 1];
-		schedule[graph->vertexCount - i - 1] = tmp;
+	int tmp = schedule[i];
+	schedule[i] = schedule[graph->vertexCount - i - 1];
+	schedule[graph->vertexCount - i - 1] = tmp;
 	}
-
+	*/
+	printf("\nCreated Graph");
 	return false;
 }
 
 int* findOrder(int numCourses, int** prerequisites, int prerequisitesRowSize, int prerequisitesColSize, int* returnSize) {
-	int* schedule = (int*)malloc(sizeof(int)*numCourses);	
+	int* schedule = (int*)malloc(sizeof(int)*numCourses);
 	Graph* graph = createGraph(numCourses, prerequisites, prerequisitesRowSize, prerequisitesColSize);
 	bool isCycle = graphTraversal(graph, schedule);
 	if (!isCycle) {
@@ -129,9 +128,3 @@ int* findOrder(int numCourses, int** prerequisites, int prerequisitesRowSize, in
 
 	return schedule;
 }
-
-
-
-
-
-
