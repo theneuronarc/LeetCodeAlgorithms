@@ -1,0 +1,59 @@
+class Codec {
+public:
+
+	void serializePreOrder(TreeNode* root, string &str){
+		if(!root) {
+			str.push_back('#');
+			str.push_back(',');
+			return;
+		}
+		else{
+			str += (std::to_string(root->val));
+			str.push_back(',');
+		}
+
+		serializePreOrder(root->left, str);
+		serializePreOrder(root->right, str);
+	}
+
+
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+		string res;
+		if(!root)
+		    return res;
+		serializePreOrder(root, res);
+		res.pop_back();
+		//cout << res << endl;
+		return res;
+    }
+
+	TreeNode* deserializePreOrder(string& str, int& pos){
+		TreeNode* root;
+		string sval;
+		//cout << str[pos];
+		if(pos >= str.length() || str[pos] == '#') {
+		    pos++;
+		    pos++;
+			return NULL;
+		}
+		else{
+		    while(str[pos] != ','){
+		        sval.push_back(str[pos++]);
+		    }
+			root = new TreeNode(atoi(sval.c_str()));
+			//root->val = atoi(str[pos]);
+			pos++;
+		}
+		root->left = deserializePreOrder(str,pos);
+		root->right = deserializePreOrder(str,pos);
+		return root;
+	}
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        //cout << data << endl;
+        int pos = 0;
+        return deserializePreOrder(data, pos);
+    }
+};
