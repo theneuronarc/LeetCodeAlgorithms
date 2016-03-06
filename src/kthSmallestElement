@@ -1,0 +1,68 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+typedef struct TreeNode TreeNode;
+
+#define printf(...)
+TreeNode* pre(TreeNode* root, TreeNode* k){
+    TreeNode* cand = NULL;
+    TreeNode* node = root;
+    int found = 0;
+    if(!root)
+        return NULL;
+        
+    while(node){
+        if(node->val < k->val){
+            node = node->left;
+        }
+        else if(node->val == k->val){
+            found = 1;
+            if(node->left)
+                cand = node->left;
+            node = NULL;
+        }
+        else{
+            cand = node;
+            node = node->right;
+        }
+    }
+    printf("%d", cand->val);
+    return found ? cand : NULL;
+}
+
+TreeNode* init(TreeNode* root, int* val, int k){
+    TreeNode* node;
+    if(!root)
+        return NULL;
+    
+    if(node = init(root->left, val, k))
+        return node;
+    printf("\n%d %d", root->val, *val);
+    if(k == *val){
+        printf("\nres %d %d", root->val, *val);
+        return root;
+    }
+    else
+        (*val)++;
+    printf("\n%d %d", root->val, *val);
+    if(node = init(root->right, val, k))
+        return node;
+    
+    return NULL;
+}
+
+int kthSmallest(struct TreeNode* root, int k) {
+    TreeNode* kthElement = 0;
+    int val = 1;
+    if(!kthElement)
+        kthElement = init(root,&val, k);
+    else
+        kthElement = pre(root, kthElement);
+        
+    return kthElement ? kthElement->val : 0;
+}
